@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>grp[100005];
+int vis[100005];
+int dis[100005];
+void DFS(int source,int d)
+{
+    vis[source] = 1;
+    dis[source] = d;
+    for(auto child : grp[source])
+    {
+        if(vis[child]==0)
+        {
+            DFS(child,d+1);
+        }
+    }
+}
+int main()
+{
+    int node,edge;
+    cin>>node>>edge;
+    while(edge--)
+    {
+        int x,y;
+        cin>>x>>y;
+        grp[x].push_back(y);
+        grp[y].push_back(x);
+    }
+    int source;
+    cout<<" Enter source = ";
+    cin>>source;
+    DFS(source,0);
+    for(int i=1;i<=node;i++)
+    {
+        cout<<source<<" -> "<< i <<" = "<<dis[i]<<endl;
+    }
+    return 0;
+
+}
