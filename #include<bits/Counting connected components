@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>grp[100000];
+int vis[10000];
+void DFS(int root)
+
+   {
+       vis[root] = 1;
+       for(int i=0;i<grp[root].size();i++)
+       {
+           int child = grp[root][i];
+           if(vis[child]==0)
+           {
+               DFS(child);
+           }
+       }
+
+  }
+int main()
+{
+    int node,edge;
+    cin>>node>>edge;
+    while(edge--)
+    {
+        int x,y;
+        cin>>x>>y;
+        grp[x].push_back(y);
+        grp[y].push_back(x);
+    }
+    int cnt = 0;
+    for(int i=1;i<=node;i++)
+    {
+        if(vis[i]==0)
+        {
+            cnt++;
+            DFS(i);
+        }
+    }
+    cout<<cnt<<endl;
+
+  return 0;
+}
+
